@@ -3,9 +3,7 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-*.min.css
-*.min.js
-*.map
+
 
 # User-specific files
 *.rsuser
@@ -13,6 +11,9 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.min.css
+*.min.js
+*.map
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)
@@ -343,3 +344,4 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/NorthwindDBProject.MvcWebUI/wwwroot/lib
