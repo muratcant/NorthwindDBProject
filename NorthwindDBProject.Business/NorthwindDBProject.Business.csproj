@@ -22,4 +22,9 @@
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NorthwindDBProject.DataAccess\NorthwindDBProject.DataAccess.csproj" />
+    <ProjectReference Include="..\NorthwindDBProject.Entities\NorthwindDBProject.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
