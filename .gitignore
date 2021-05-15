@@ -345,3 +345,5 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /NorthwindDBProject.MvcWebUI/wwwroot/lib
+/NorthwindDBProject.MvcWebUI/wwwroot/assets/images
+/NorthwindDBProject.MvcWebUI/wwwroot/assets/custom
