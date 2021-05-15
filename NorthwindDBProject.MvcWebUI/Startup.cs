@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using NorthwindDBProject.MvcWebUI.Data;
 using Microsoft.Extensions.Configuration;
@@ -31,14 +25,7 @@ namespace NorthwindDBProject.MvcWebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = @"Host=localhost;Port=5432;Database=NorthwindDB;Username=muratcant;Password=PostgreSQL1.";
-            services.AddDbContext<ApplicationDbContext>
-                (options => options.UseNpgsql(connectionString));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews();
-            services.AddRazorPages();
 
             #region EntitesInjects
             services.AddTransient<ICategoryDal, EFCategoryDal>();
@@ -84,6 +71,17 @@ namespace NorthwindDBProject.MvcWebUI
             services.AddTransient<IUsStateService, UsStateManager>();
 
             #endregion
+
+            string connectionString = @"Host=localhost;Port=5432;Database=NorthwindDB;Username=muratcant;Password=PostgreSQL1.";
+            services.AddDbContext<ApplicationDbContext>
+                (options => options.UseNpgsql(connectionString));
+
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddUserManager<UserManager<IdentityUser>>()
+                .AddSignInManager<SignInManager<IdentityUser>>();
+            services.AddControllersWithViews();
+            services.AddRazorPages();
 
         }
 
