@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NorthwindDBProject.Business\NorthwindDBProject.Business.csproj" />
     <ProjectReference Include="..\NorthwindDBProject.DataAccess\NorthwindDBProject.DataAccess.csproj" />
     <ProjectReference Include="..\NorthwindDBProject.Entities\NorthwindDBProject.Entities.csproj" />
   </ItemGroup>

@@ -12,6 +12,10 @@ using NorthwindDBProject.MvcWebUI.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NorthwindDBProject.DataAccess.Concrete.EntityFramework;
+using NorthwindDBProject.DataAccess.Abstract;
+using NorthwindDBProject.Business.Concrete;
+using NorthwindDBProject.Business.Abstract;
 
 namespace NorthwindDBProject.MvcWebUI
 {
@@ -35,6 +39,52 @@ namespace NorthwindDBProject.MvcWebUI
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            #region EntitesInjects
+            services.AddTransient<ICategoryDal, EFCategoryDal>();
+            services.AddTransient<ICategoryService, CategoryManager>();
+
+            services.AddTransient<ICustomerDal, EFCustomerDal>();
+            services.AddTransient<ICustomerService, CustomerManager>();
+
+            services.AddTransient<ICustomerCustomerDemoDal, EFCustomerCustomerDemoDal>();
+            services.AddTransient<ICustomerCustomerDemoService, CustomerCustomerDemoManager>();
+
+            services.AddTransient<ICustomerDemographicDal, EFCustomerDemographicDal>();
+            services.AddTransient<ICustomerDemographicService, CustomerDemographicManager>();
+
+            services.AddTransient<IEmployeeDal, EFEmployeeDal>();
+            services.AddTransient<IEmployeeService, EmployeeManager>();
+
+            services.AddTransient<IEmployeeTerritoryDal, EFEmployeeTerritoryDal>();
+            services.AddTransient<IEmployeeTerritoryService, EmployeeTerritoryManager>();
+
+            services.AddTransient<IOrderDal, EFOrderDal>();
+            services.AddTransient<IOrderService, OrderManager>();
+
+            services.AddTransient<IOrderDetailDal, EFOrderDetailDal>();
+            services.AddTransient<IOrderDetailService, OrderDetailManager>();
+
+            services.AddTransient<IProductDal, EFProductDal>();
+            services.AddTransient<IProductService, ProductManager>();
+
+            services.AddTransient<IRegionDal, EFRegionDal>();
+            services.AddTransient<IRegionService, RegionManager>();
+
+            services.AddTransient<IShipperDal, EFShipperDal>();
+            services.AddTransient<IShipperService, ShipperManager>();
+
+            services.AddTransient<ISupplierDal, EFSupplierDal>();
+            services.AddTransient<ISupplierService, SupplierManager>();
+
+            services.AddTransient<ITerritoryDal, EFTerritoryDal>();
+            services.AddTransient<ITerritoryService, TerritoryManager>();
+
+            services.AddTransient<IUsStateDal, EFUsStateDal>();
+            services.AddTransient<IUsStateService, UsStateManager>();
+
+            #endregion
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
