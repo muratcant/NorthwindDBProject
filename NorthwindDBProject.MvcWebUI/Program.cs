@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace NorthwindDBProject.WebUI
+namespace NorthwindDBProject.MvcWebUI
 {
     public class Program
     {

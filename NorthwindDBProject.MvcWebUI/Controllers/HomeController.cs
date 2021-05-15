@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using NorthwindDBProject.WebUI.Models;
+using NorthwindDBProject.MvcWebUI.Models;
 
-namespace NorthwindDBProject.WebUI.Controllers
+namespace NorthwindDBProject.MvcWebUI.Controllers
 {
     public class HomeController : Controller
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace NorthwindDBProject.WebUI.Models
+namespace NorthwindDBProject.MvcWebUI.Models
 {
     public class ErrorViewModel
     {
