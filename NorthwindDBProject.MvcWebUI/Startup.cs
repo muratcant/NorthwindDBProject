@@ -25,8 +25,6 @@ namespace NorthwindDBProject.MvcWebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-
             #region EntitesInjects
             services.AddTransient<ICategoryDal, EFCategoryDal>();
             services.AddTransient<ICategoryService, CategoryManager>();
@@ -77,9 +75,9 @@ namespace NorthwindDBProject.MvcWebUI
                 (options => options.UseNpgsql(connectionString));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddUserManager<UserManager<IdentityUser>>()
-                .AddSignInManager<SignInManager<IdentityUser>>();
+                    .AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddUserManager<UserManager<IdentityUser>>()
+                    .AddSignInManager<SignInManager<IdentityUser>>();
             services.AddControllersWithViews();
             services.AddRazorPages();
 
@@ -100,9 +98,7 @@ namespace NorthwindDBProject.MvcWebUI
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
 
