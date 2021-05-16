@@ -10,6 +10,13 @@ using NorthwindDBProject.DataAccess.Concrete.EntityFramework;
 using NorthwindDBProject.DataAccess.Abstract;
 using NorthwindDBProject.Business.Concrete;
 using NorthwindDBProject.Business.Abstract;
+using System.Globalization;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
+using System.Linq;
+using Microsoft.Extensions.Options;
 
 namespace NorthwindDBProject.MvcWebUI
 {
@@ -25,6 +32,26 @@ namespace NorthwindDBProject.MvcWebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region LangOptions
+            // Kayýt iþlemimizi gerçekleþtiriyoruz, AddMvc() den önce eklediðinizden emin olunuz.
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new List<CultureInfo>
+                {
+                    new CultureInfo("tr-TR"),
+                };
+                options.DefaultRequestCulture = new RequestCulture("tr-TR");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
+
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
+
+            #endregion
 
 
             #region EntitesInjects
@@ -77,9 +104,9 @@ namespace NorthwindDBProject.MvcWebUI
                 (options => options.UseNpgsql(connectionString));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddUserManager<UserManager<IdentityUser>>()
-                .AddSignInManager<SignInManager<IdentityUser>>();
+                    .AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddUserManager<UserManager<IdentityUser>>()
+                    .AddSignInManager<SignInManager<IdentityUser>>();
             services.AddControllersWithViews();
             services.AddRazorPages();
 
@@ -100,11 +127,18 @@ namespace NorthwindDBProject.MvcWebUI
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
+
+            var localizeOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            var cookieProvider = localizeOptions.Value.RequestCultureProviders
+                .OfType<CookieRequestCultureProvider>()
+                .First();
+            // Set the new cookie name
+            cookieProvider.CookieName = ".AspNetCore.Culture";
+
+            app.UseRequestLocalization(localizeOptions.Value);
 
             app.UseEndpoints(endpoints =>
             {
